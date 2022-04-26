@@ -15,18 +15,25 @@ namespace ASP_NET_Video_Games_API.Controllers
             _context = context;
         }
         [HttpGet]
-        public IActionResult GetVideoGame()
+        public IActionResult GetAllVideoGames()
         {
-            var videoGame = _context.VideoGames.Select(vg => vg.Publisher).Distinct();
+            var allVideoGames = _context.VideoGames;
 
-            return Ok(videoGame);
+            return Ok(allVideoGames);
         }
 
         [HttpGet("{Id}")]
         public IActionResult GetGamesbyId(int Id)
         {
             var videoGames = _context.VideoGames.Where(vg => vg.Id == Id); 
-            return Ok();
+            return Ok(videoGames);
         }
+        //[HttpGet("{Platform}")]
+        //public IActionResult GetGamesByPlatform(string platform)
+        //{
+        //    var platformData = _context.VideoGames.Where(p => p.Platform == platform);
+        //    return Ok(platformData);
+        //}
     }
+
 }

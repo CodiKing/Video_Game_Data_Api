@@ -1,6 +1,7 @@
 ﻿using ASP_NET_Video_Games_API.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ASP_NET_Video_Games_API.Models;
 
 namespace ASP_NET_Video_Games_API.Controllers
 {   //api/Games
@@ -28,12 +29,14 @@ namespace ASP_NET_Video_Games_API.Controllers
             var videoGames = _context.VideoGames.Where(vg => vg.Id == Id); 
             return Ok(videoGames);
         }
-        //[HttpGet("{Platform}")]
-        //public IActionResult GetGamesByPlatform(string platform)
-        //{
-        //    var platformData = _context.VideoGames.Where(p => p.Platform == platform);
-        //    return Ok(platformData);
-        //}
+        [HttpGet("{Platform}")]
+        public IActionResult GetGamesByPlatform(string platform)
+        {
+            var platform = _context.VideoGames;
+            var platformData = platform.Where(p => p.Platform == platform);
+            foreach (VideoGame platform in platformData)
+            return Ok(platformData);
+        }
     }
 
 }

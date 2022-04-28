@@ -26,17 +26,28 @@ namespace ASP_NET_Video_Games_API.Controllers
         [HttpGet("{Id}")]
         public IActionResult GetGamesbyId(int Id)
         {
-            var videoGames = _context.VideoGames.Where(vg => vg.Id == Id); 
+            var videoGames = _context.VideoGames.Where(vg => vg.Id == Id);
+
+
             return Ok(videoGames);
         }
-        [HttpGet("{Platform}")]
-        public IActionResult GetGamesByPlatform(string platform)
-        {
-            var platform = _context.VideoGames;
-            var platformData = platform.Where(p => p.Platform == platform);
-            foreach (VideoGame platform in platformData)
-            return Ok(platformData);
-        }
-    }
 
+        [HttpGet("searchByTitle/{searchInput}")]
+        public IActionResult GetByTitle(string searchInput) {
+         
+            var videoGamesByTitle = _context.VideoGames.Where(vg => vg.Name.Contains(searchInput));
+
+            return Ok(videoGamesByTitle);
+        }
+        [HttpGet("byPlatform-globalsales")]
+        public IActionResult GetGamesByPlatform()
+        {
+            var platformTotalSales = _context.VideoGames.Select(vg => new { vg.Platform, vg.GlobalSales });
+               
+
+                 return Ok(platformTotalSales);
+        }
+
+
+    }
 }

@@ -47,6 +47,19 @@ namespace ASP_NET_Video_Games_API.Controllers
 
                  return Ok(platformTotalSales);
         }
+        [HttpGet("getGameStats/{name}")]
+        public IActionResult GetGameStats(string name)
+        {
+            var gameStats = _context.VideoGames.Where(gs => gs.Name == name);
+                return Ok(gameStats);
+        }
+        [HttpGet("getGamesByRank")]
+        public IActionResult GetGamesByRank()
+        {
+            var rankstats = _context.VideoGames.OrderBy(rs => rs.Rank).Take(10);
+                return Ok(rankstats);
+        }
+  
 
 
     }
